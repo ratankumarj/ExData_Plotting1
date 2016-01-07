@@ -1,0 +1,61 @@
+---
+title: "Plot4"
+author: "Ratan Jha"
+date: "January 5, 2016"
+output: word_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+This work is for assignment 1 for Exploratory Data Analysis
+
+Set working directory
+```{r}
+setwd("~/RforRatan/ExploratoryAnalysis")
+```
+
+Read the file
+```{r}
+data <- read.csv("household_power_consumption.txt",sep=";",header=TRUE)
+```
+
+Keep the only relevant 2 days of data.
+```{r}
+data$NewDate <- as.Date(data$Date,"%d/%m/%Y")
+data <- subset(data,data$NewDate=='2007-02-01'| data$NewDate=='2007-02-02')
+```
+
+
+Convert Data Points
+```{r}
+data$DateTime <- paste(data$Date, data$Time)
+data$NewDateTime <- strptime(data$DateTime,"%d/%m/%Y %H:%M:%S")
+data$Sub_metering_1 <- as.numeric(data$Sub_metering_1)
+data$Sub_metering_2 <- as.numeric(data$Sub_metering_2)
+data$Sub_metering_3 <- as.numeric(data$Sub_metering_3)
+data$Global_active_power <- as.numeric(data$Global_active_power)
+data$Global_reactive_power <- as.numeric(data$Global_reactive_power)
+data$Voltage <- as.numeric(data$Voltage)
+```
+
+Make first plot 1
+```{r}
+png(file="plot4.png",width = 480, height = 480)
+par(mfrow=c(2,2),tcl=-0.5)
+par(mar=c(4,4,1,1))
+plot(data$NewDateTime,data$Global_active_power/1000,type="l",ylab="Global Active Power",xlab="")
+plot(data$NewDateTime,data$Voltage/10,type="l",ylab="Voltage",xlab="datetime")
+plot(data$NewDateTime,data$Sub_metering_1,type="n",ylab="Energy sub metering",xlab="",width = 480, height = 480)
+lines(data$NewDateTime,data$Sub_metering_1)
+lines(data$NewDateTime,data$Sub_metering_2,col="red")
+lines(data$NewDateTime,data$Sub_metering_3,col="blue")
+x <- c("Sub_metering_1","Sub_metering_2","Sub_metering_3")
+legend("topright",legend = x, col=c("black","red","blue"),lwd=c(2.5,2.5,2.5),cex=0.8,)
+plot(data$NewDateTime,data$Global_reactive_power/100,type="l",xlab="datetime",ylab="Global_reactive_power")
+dev.off() #close the file
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
