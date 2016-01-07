@@ -18,7 +18,11 @@ setwd("~/RforRatan/ExploratoryAnalysis")
 
 Read the file
 ```{r}
+<<<<<<< HEAD
 data <- read.table("household_power_consumption.txt",sep=";",na="?",header=TRUE)
+=======
+data <- read.csv("household_power_consumption.txt",sep=";",header=TRUE)
+>>>>>>> acead2e4fbd64ecbc9493f3c71d6e61c8783c09b
 ```
 
 Keep the only relevant 2 days of data.
@@ -37,8 +41,12 @@ data$Global_active_power <- as.numeric(data$Global_active_power)
 
 Make first plot 1
 ```{r}
+<<<<<<< HEAD
 setwd("~/RforRatan/ExploratoryAnalysis/ExData_Plotting1")
 hist(data$Global_active_power,col='red',main="Global Active Power",xlab="Global Active Power (kilowatts)")
+=======
+hist(data$Global_active_power/1000,col='red',main="Global Active Power",xlab="Global Active Power (kilowatts)")
+>>>>>>> acead2e4fbd64ecbc9493f3c71d6e61c8783c09b
 dev.copy(png,file="plot1.png",width = 480, height = 480) # copy my file to png file
 dev.off() #close the file
 ```

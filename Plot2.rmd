@@ -36,10 +36,15 @@ data$Global_active_power <- as.numeric(data$Global_active_power)
 ```
 
 Make first plot 1
+<<<<<<< HEAD
 
 ```{r}
 setwd("~/RforRatan/ExploratoryAnalysis/ExData_Plotting1")
 plot(data$NewDateTime,data$Global_active_power,type="l",ylab="Global Active Power (kilowatts)",xlab="")
+=======
+```{r}
+plot(data$NewDateTime,data$Global_active_power/1000,type="l",ylab="Global Active Power (kilowatts)",xlab="")
+>>>>>>> acead2e4fbd64ecbc9493f3c71d6e61c8783c09b
 dev.copy(png,file="plot2.png",width = 480, height = 480) # copy my file to png file
 dev.off() #close the file
 ```

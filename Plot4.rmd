@@ -16,10 +16,16 @@ Set working directory
 setwd("~/RforRatan/ExploratoryAnalysis")
 ```
 
+<<<<<<< HEAD
 
 Read the file
 ```{r}
 data <- read.table("household_power_consumption.txt",sep=";",na="?",header=TRUE)
+=======
+Read the file
+```{r}
+data <- read.csv("household_power_consumption.txt",sep=";",header=TRUE)
+>>>>>>> acead2e4fbd64ecbc9493f3c71d6e61c8783c09b
 ```
 
 Keep the only relevant 2 days of data.
@@ -43,19 +49,31 @@ data$Voltage <- as.numeric(data$Voltage)
 
 Make first plot 1
 ```{r}
+<<<<<<< HEAD
 setwd("~/RforRatan/ExploratoryAnalysis/ExData_Plotting1")
 png(file="plot4.png",width = 480, height = 480)
 par(mfrow=c(2,2),tcl=-0.5)
 par(mar=c(4,4,1,1))
 plot(data$NewDateTime,data$Global_active_power,type="l",ylab="Global Active Power",xlab="")
 plot(data$NewDateTime,data$Voltage,type="l",ylab="Voltage",xlab="datetime")
+=======
+png(file="plot4.png",width = 480, height = 480)
+par(mfrow=c(2,2),tcl=-0.5)
+par(mar=c(4,4,1,1))
+plot(data$NewDateTime,data$Global_active_power/1000,type="l",ylab="Global Active Power",xlab="")
+plot(data$NewDateTime,data$Voltage/10,type="l",ylab="Voltage",xlab="datetime")
+>>>>>>> acead2e4fbd64ecbc9493f3c71d6e61c8783c09b
 plot(data$NewDateTime,data$Sub_metering_1,type="n",ylab="Energy sub metering",xlab="",width = 480, height = 480)
 lines(data$NewDateTime,data$Sub_metering_1)
 lines(data$NewDateTime,data$Sub_metering_2,col="red")
 lines(data$NewDateTime,data$Sub_metering_3,col="blue")
 x <- c("Sub_metering_1","Sub_metering_2","Sub_metering_3")
 legend("topright",legend = x, col=c("black","red","blue"),lwd=c(2.5,2.5,2.5),cex=0.8,)
+<<<<<<< HEAD
 plot(data$NewDateTime,data$Global_reactive_power,type="l",xlab="datetime",ylab="Global_reactive_power")
+=======
+plot(data$NewDateTime,data$Global_reactive_power/100,type="l",xlab="datetime",ylab="Global_reactive_power")
+>>>>>>> acead2e4fbd64ecbc9493f3c71d6e61c8783c09b
 dev.off() #close the file
 ```
 
