@@ -1,0 +1,48 @@
+---
+title: "Plot2"
+author: "Ratan Jha"
+date: "January 5, 2016"
+output: word_document
+---
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+This work is for assignment 1 for Exploratory Data Analysis
+
+Set working directory
+```{r}
+setwd("~/RforRatan/ExploratoryAnalysis")
+```
+
+Read the file
+```{r}
+data <- read.csv("household_power_consumption.txt",sep=";",header=TRUE)
+```
+
+Keep the only relevant 2 days of data.
+```{r}
+data <- subset(data,data$Date=='1/2/2007'|data$Date=='2/2/2007')
+```
+
+
+Convert Date & time
+```{r}
+data$DateTime <- paste(data$Date, data$Time)
+data$NewDateTime <- strptime(data$DateTime,"%d/%m/%Y %H:%M:%S")
+data$Global_active_power <- as.numeric(data$Global_active_power)
+
+```
+
+Make first plot 1
+
+```{r}
+setwd("~/RforRatan/ExploratoryAnalysis/ExData_Plotting1")
+plot(data$NewDateTime,data$Global_active_power,type="l",ylab="Global Active Power (kilowatts)",xlab="")
+dev.copy(png,file="plot2.png",width = 480, height = 480) # copy my file to png file
+dev.off() #close the file
+```
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
